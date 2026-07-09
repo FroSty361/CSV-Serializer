@@ -1,4 +1,4 @@
-name|value
-string|Hi!
-integer|16
-floating_point_number|3.14
+name,value
+string,Hi!
+integer,16
+floating_point_number,3.14

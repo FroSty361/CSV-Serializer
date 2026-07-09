@@ -1,16 +1,42 @@
 class CSVSerializer:
     @staticmethod
-    def deserialize(input_class: object, path: str):
+    def deserialize_from_path(input_class: object, path: str, overwrite_copies: bool):
         content = ""
 
         with open(path, "r") as file:
             content = file.read()
 
-        CSVSerializer.deserialize(content, input_class)
+        CSVSerializer.deserialize(input_class, content, overwrite_copies)
 
     @staticmethod
-    def deserialize(input_class: object, content: str):
-        ...
+    def deserialize(input_class: object, content: str, overwrite_copies: bool):
+        lines = content.splitlines()
+
+        used_names = []
+
+        for i in range(len(lines)):
+            line = lines[i]
+            tokens = line.split(',')
+
+            length = len(tokens)
+
+            if length < 2:
+                continue
+
+            name = tokens[0]
+            value = tokens[1]
+
+            used_names.append(name)
+
+            if len(used_names) > len(set(used_names)):
+                used_names = list(set(used_names))
+
+                if overwrite_copies == False:
+                    continue
+
+            CSVSerializer.deserialize_kvp(input_class, name, value)
+
+        return input_class
 
     @staticmethod
     def deserialize_kvp(input_class, name: str, value: str):

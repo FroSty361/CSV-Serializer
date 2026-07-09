@@ -12,21 +12,7 @@ def main():
 
     print(f"First = {input_class}")
 
-    with open(file_arg, "r") as file:
-        for line in file:
-            tokens = line.split("|")
-
-            length = len(tokens)
-
-            if length < 1:
-                continue
-            elif length < 2:
-                continue
-
-            name = tokens[0]
-            value = tokens[1]
-
-            CSVSerializer.deserialize_kvp(input_class, name, value)
+    CSVSerializer.deserialize_from_path(input_class, file_arg, True)
 
     print(input_class)
 
