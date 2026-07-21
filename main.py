@@ -1,6 +1,7 @@
 import sys
-from src.core.core import CSVSerializer
+from src.core.core import CSVSerializer, CSVSerializerOptions
 from tests.classes.test_class import Test
+
 
 def main():
     if len(sys.argv) - 1 < 1:
@@ -12,9 +13,12 @@ def main():
 
     print(f"First = {input_class}")
 
-    CSVSerializer.deserialize_from_path(input_class, file_arg, True)
+    options = CSVSerializerOptions(overwrite_copies=True, delimiter=",", raise_field_errors=True)
+
+    CSVSerializer.deserialize_from_path(input_class, file_arg, options)
 
     print(input_class)
+
 
 if __name__ == '__main__':
     main()

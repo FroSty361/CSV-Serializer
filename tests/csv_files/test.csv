@@ -1,4 +1,4 @@
-name,value
-string,Hi!
+|name|,|value|
+string,""Hi!1""
 integer,16
 floating_point_number,3.14
